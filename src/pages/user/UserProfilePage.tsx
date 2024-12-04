@@ -49,7 +49,7 @@ const UserProfile: React.FC = () => {
             sortField: 'publishDate',
             sortDirection: 'DESC',
         },
-        String(user.id),
+        user.id,
     );
 
     const handleTabChange = (tab: string) => {

@@ -17,10 +17,9 @@ interface CategoryManipulationProps {
 
 const CategoryManipulation: React.FC<CategoryManipulationProps> = ({ category, user, isEditing, getData, hideCategory, updateCategory, setIsEditing }) => {
     const handleSaveEdit = async () => {
-        let response;
         if (isEditing) {
             try {
-                response = category.id === -1 ? await CategoryService.createCategory(getData()) : await CategoryService.deleteCategory(category.id);
+                category.id === -1 ? await CategoryService.createCategory(getData()) : await CategoryService.deleteCategory(category.id);
                 updateCategory(getData());
                 setIsEditing(false);
                 category.id !== -1 ? notifySuccess('Category added successfully')

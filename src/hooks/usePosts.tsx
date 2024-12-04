@@ -13,7 +13,7 @@ export enum PostServiceType {
     MY_POSTS = 'myPosts',
 }
 
-const PostServiceMap = {
+const PostServiceMap: { [key in PostServiceType]: (id: number, params: QueryOptions) => Promise<{ items: Post[], total: number }> } = {
     [PostServiceType.DEFAULT]: PostService.getPosts,
     [PostServiceType.LIKED]: UserService.getLikedPosts,
     [PostServiceType.SAVED]: FavouriteService.getFavouritePosts,
@@ -23,7 +23,7 @@ const PostServiceMap = {
 export { PostServiceMap };
 
 
-export const usePosts = (service: PostServiceType, initialParams: QueryOptions, id: string) => {
+export const usePosts = (service: PostServiceType, initialParams: QueryOptions, id: number) => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);

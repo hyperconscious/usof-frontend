@@ -39,9 +39,13 @@ The USOF Frontend is the client-side application that interacts with the USOF AP
   ```plaintext
   REACT_APP_API_URL=http://localhost:5000
   ```
-5. Start the development server:
+5. Build:
   ```bash
-  npm run dev
+  npm run build
+  ```
+6. Start the app:
+  ```bash
+  npm run preview
   ```
 
 ## Usage

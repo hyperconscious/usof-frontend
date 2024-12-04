@@ -47,7 +47,6 @@ const AddEditPostModal: React.FC<EditUserModalProps> = ({ onClose, me, user, set
     };
 
     const onSubmit = async (data: UpdateUserData) => {
-        let avatar = user.avatar;
         try {
             if (data.email !== user.email) {
                 AuthService.sendVerificationEmail(data.email!);
@@ -58,11 +57,11 @@ const AddEditPostModal: React.FC<EditUserModalProps> = ({ onClose, me, user, set
             if (avatarFile) {
                 const formData = new FormData();
                 formData.append('avatar', avatarFile);
-                avatar = (await UserService.uploadAvatar(user.id, formData)).avatar;
+                await UserService.uploadAvatar(user.id, formData)
             }
             notifySuccess('User updated successfully');
             onClose();
-            setUser((prev) => ({ ...prev, ...data, avatarFile }));
+            setUser((prev) => ({ ...prev, ...data }));
         } catch (error) {
             console.error('Failed to update user:', error);
             notifyError(`Failed to update user, please try again later`);

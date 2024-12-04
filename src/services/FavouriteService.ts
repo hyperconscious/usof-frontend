@@ -3,7 +3,7 @@ import { PaginatedResponse, QueryOptions } from '../types/query';
 import { Post } from '../types/post';
 
 class FavouriteService {
-  static async getFavouritePosts(id: string, query: QueryOptions): Promise<PaginatedResponse<Post>> {
+  static async getFavouritePosts(id: number, query: QueryOptions): Promise<PaginatedResponse<Post>> {
     const response = await axios.get('/api/favourites', { params: query });
     id && id;
     return response.data;

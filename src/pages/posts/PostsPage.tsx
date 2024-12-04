@@ -25,8 +25,9 @@ const PostsPage: React.FC = () => {
     page,
     limit: 12,
     sortField: searchParams.get('sortField') || 'publishDate',
-    sortDirection: (searchParams.get('sortDirection') as 'ASC' | 'DESC') || 'ASC',
-  }, '');
+    sortDirection: (searchParams.get('sortDirection') as 'ASC' | 'DESC') || 'DESC',
+    search: search,
+  }, -1);
 
   const handleFilterChange = (key: string, value: any) => {
     setSearchParams((prev) => {
@@ -53,8 +54,8 @@ const PostsPage: React.FC = () => {
     setParams({
       page: 1,
       limit: 12,
-      sortField: 'likes_count',
-      sortDirection: 'ASC',
+      sortField: 'publishDate',
+      sortDirection: 'DESC',
       filters: {},
       search: '',
     });
@@ -89,8 +90,8 @@ const PostsPage: React.FC = () => {
           query={{
             page,
             limit: 12,
-            sortField: searchParams.get('sortField') || 'likes_count',
-            sortDirection: (searchParams.get('sortDirection') as 'ASC' | 'DESC') || 'ASC',
+            sortField: searchParams.get('sortField') || 'publishDate',
+            sortDirection: (searchParams.get('sortDirection') as 'ASC' | 'DESC') || 'DESC',
             filters: {
               categories: searchParams.get('categories') || undefined,
               status: searchParams.get('status') as PostStatus || undefined,
@@ -112,6 +113,10 @@ const PostsPage: React.FC = () => {
                   newParams.set('page', '1');
                   return newParams;
                 });
+                setParams((prev) => ({
+                  ...prev,
+                  search,
+                }));
               }
             }}
           />

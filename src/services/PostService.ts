@@ -5,14 +5,14 @@ import { Comment } from '../types/comment';
 import { CreatePostData, UpdateCommentData } from '../validation/schemas';
 
 class PostService {
-  static async getPosts(id: string, query: QueryOptions): Promise<PaginatedResponse<Post>> {
+  static async getPosts(id: number, query: QueryOptions): Promise<PaginatedResponse<Post>> {
     const response = await axios.get('/api/posts', { params: query });
     id && id;
     return response.data;
   }
 
   static async getMyPosts(
-    id: string,
+    id: number,
     query: QueryOptions,
   ): Promise<PaginatedResponse<Post>> {
     const response = await axios.get('/api/posts/my-posts', { params: query });
